@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("38gCZzfPVwTrLRWj5poqzQwgsXwQCZQCqZQ5XCT4anHK");
+declare_id!("3nW5XsWpnJ7dYKmVhQQ9LiSSvw6CFQUe5kKgiZPxApMp");
 
 pub mod state;
 pub mod contexts;
@@ -10,26 +10,22 @@ pub use contexts::*;
 pub use errors::*;
 
 #[program]
-pub mod nft_mint_vault_swap {
+pub mod nft_mint_vault_swap_sol {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>, name: String, fee: u16) -> Result<()> {
-        ctx.accounts.init(name, fee, &ctx.bumps)
+    pub fn nft_mint(ctx: Context<MintNFT>, metadata_uri: String) -> Result<()> {
+        MintNFT::mint_nft(ctx, metadata_uri)
     }
 
-    pub fn list(ctx: Context<List>, price: u64) -> Result<()> {
-        ctx.accounts.create_listing(price, &ctx.bumps)?;
-        ctx.accounts.deposit_nft()
+    pub fn lock_nft(ctx: Context<LockNft>, nft_mint_address: Pubkey, rental_fee: u64) -> Result<()> {
+        LockNft::lock_nft(ctx, nft_mint_address, rental_fee)
     }
 
-    pub fn delist(ctx: Context<Delist>) -> Result<()> {
-        ctx.accounts.withdraw_nft()
+    pub fn unlock_nft(ctx: Context<UnlockNFT>, nft_mint_address: Pubkey) -> Result<()> {
+        UnlockNFT::unlock_nft(ctx, nft_mint_address)
     }
 
-    pub fn purchase(ctx: Context<Purchase>) -> Result<()> {
-        ctx.accounts.send_sol()?;
-        ctx.accounts.send_nft()?;
-        ctx.accounts.close_mint_vault()
-
+    pub fn swap(ctx: Context<Swap>, fee: u64) -> Result<()> {
+        Swap::swap_sol_for_nft(ctx, fee)
     }
 }

@@ -1,7 +1,5 @@
-pub mod marketplace;
-pub mod listing;
+pub mod nft_minting;
 pub mod swap;
 
-pub use marketplace::*;
-pub use listing::*;
+pub use nft_minting::*;
 pub use swap::*;

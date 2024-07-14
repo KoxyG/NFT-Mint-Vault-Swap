@@ -1,10 +1,13 @@
 use anchor_lang::prelude::*;
 
-pub struct Swap {
+#[account]
+#[derive(Default,)]
+pub struct SwapNftSol {
     pub authority: Pubkey,
     pub fee: u64,
+
 }
 
-impl Space for Swap {
+impl Space for SwapNftSol {
     const INIT_SPACE: usize = 8 + 32 + 8;
 }

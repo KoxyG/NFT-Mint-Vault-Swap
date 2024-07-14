@@ -1,11 +1,11 @@
 [toolchain]
 
 [features]
-seeds = false
+seeds = true
 skip-lint = false
 
 [programs.localnet]
-nft_mint_vault_swap_sol = "38gCZzfPVwTrLRWj5poqzQwgsXwQCZQCqZQ5XCT4anHK"
+nft_mint_vault_swap_sol = "3nW5XsWpnJ7dYKmVhQQ9LiSSvw6CFQUe5kKgiZPxApMp"
 
 [registry]
 url = "https://api.apr.dev"
